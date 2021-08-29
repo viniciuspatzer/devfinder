@@ -12,10 +12,10 @@ export const Content = styled.div`
     justify-content: space-between;
 
     div{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
 
     input[type="text"]{
       width: 100%;
@@ -27,7 +27,14 @@ export const Content = styled.div`
       border: 0;
 
       &::placeholder{
-      color: var(--text-body);
+        color: var(--text-body);
+      }
+
+      &:-webkit-autofill {
+        box-shadow: 0 0 0 30px var(--content-bg) inset;
+        -webkit-box-shadow: 0 0 0 30px var(--content-bg) inset;
+        -webkit-text-fill-color: var(--text-title);
+        caret-color: var(--text-title);
       }
     }
   }
@@ -43,5 +50,12 @@ export const Content = styled.div`
       filter: brightness(1.25);
     }
   }
+
+  *{
+    -webkit-user-select: none;      
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  } 
 }
 `;

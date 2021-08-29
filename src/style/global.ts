@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
     --text-title: #FFFFFF; // #2B3442
     --text-body: #FFFFFF; // #4B6A9B
 
+    --unavailable: #8A8A8A;
     --static-white: #FFFFFF;
     --contrast-blue: #0177FE;
   }
@@ -41,17 +42,13 @@ export const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-  a{
-    text-decoration: none;
-  }
-
   // Media Queries
   html{
-    @media(max-width: 500px){
+    @media(max-width: 600px){
       font-size: 87.5%;
     }
 
-    @media(max-width: 450px){
+    @media(max-width: 500px){
       font-size: 81.25%;
     }
 

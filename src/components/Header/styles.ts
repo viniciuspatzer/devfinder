@@ -12,6 +12,7 @@ export const TopHeader = styled.header`
     cursor: pointer;
     font-weight: bold;
     font-size: 2rem;
+    text-decoration: none;
   }
 
   div{
@@ -26,4 +27,11 @@ export const TopHeader = styled.header`
       margin-right: 0.5rem;
     }
   }
+
+  *{
+    -webkit-user-select: none;      
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  } 
 `;

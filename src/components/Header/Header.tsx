@@ -3,18 +3,17 @@ import { TopHeader } from './styles'
 import { RiSunFill, RiMoonFill } from 'react-icons/ri'
 
 export function Header(){
-
-  const [theme, setTheme] = useState('dark')
+  const [theme, setTheme] = useState('DARK')
 
   function toggleDarkMode(){
     const root = document.documentElement.style;
 
-    if(theme === 'dark'){
+    if(theme === 'DARK'){
       root.setProperty('--background', '#F6F8FF');
       root.setProperty('--content-bg', '#FEFEFE');
       root.setProperty('--text-title', '#2B3442');
       root.setProperty('--text-body', '#4B6A9B');
-      setTheme('light');
+      setTheme('LIGHT');
     }
     
     else{
@@ -22,17 +21,24 @@ export function Header(){
       root.setProperty('--content-bg', '#1E2A47');
       root.setProperty('--text-title', '#FFFFFF');
       root.setProperty('--text-body', '#FFFFFF');
-      setTheme('dark');
+      setTheme('DARK');
     }
   }
 
   return(
     <TopHeader>
-      <a href={window.location.href}>devfinder</a>
+
+      <a href={window.location.hostname}>
+        devfinder
+      </a>
       <div onClick={toggleDarkMode}>
-        <h3>{theme === 'dark' ? 'LIGHT' : 'DARK'}</h3>
-        {theme === 'dark' ? <RiSunFill color="white" size="20"/> : <RiMoonFill color="grey" size="20"/>}
+        <h3>
+          {theme === 'DARK' ? 'LIGHT' : 'DARK'}
+        </h3>
+        {theme === 'DARK' ?
+        <RiSunFill color="white" size="20"/> : <RiMoonFill color="grey" size="20"/>}
       </div>
+
     </TopHeader>
   )
 }

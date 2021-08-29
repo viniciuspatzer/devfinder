@@ -7,6 +7,10 @@ export const Content = styled.main`
   border-radius: 0.75rem;
   box-shadow: 0px 16px 30px -10px rgba(0,0,0,0.2);
 
+  @media(max-width: 500px){
+    padding: 1.5rem;
+  }
+
   p.bio{
     color: var(--text-body);
     margin: 2rem 0;
@@ -78,14 +82,17 @@ export const ProfileBottom = styled.div`
     display: flex;
     align-items: center;
     padding: 0.5rem 0;
-
-    i{
-      color: var(--text-body);
-    }
+    margin-right: 2rem;
+    color: var(--text-body);
 
     p, a{
       margin-left: 1rem;
-      color: var(--text-body);
+      word-break: break-all;
+      color: inherit;
+    }
+
+    &.unavailable{
+      color: var(--unavailable);
     }
   }
 `;

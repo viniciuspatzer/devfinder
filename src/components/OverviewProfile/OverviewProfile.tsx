@@ -1,52 +1,79 @@
 import { Content, ProfileHeader, ProfileStats, ProfileBottom } from "./styles";
+import { GitHubData } from '../../interfaces';
 
-export function OverviewProfile(){
+interface OverviewProfileProps{
+  userData: GitHubData;
+}
+
+export function OverviewProfile({ userData }: OverviewProfileProps){
   return (
     <Content>
 
       <ProfileHeader>
-        <img src="https://avatars.githubusercontent.com/u/583231?v=4" alt="profile img" />
+        <img src={userData.avatar_url} alt="profile img" />
         <div>
-          <h1>The Octocat</h1>
-          <span>@octocat</span>
-          <p>Joined 25 Jan 2011</p>
+          <h1>{userData.name}</h1>
+          <span>@{userData.login}</span>
+          <p>
+            Joined at {userData.created_at ? new Intl.DateTimeFormat(navigator.language)
+            .format(new Date(userData.created_at)) : ''}
+          </p>
         </div>
       </ProfileHeader>
 
-      <p className="bio">This profile has no bio</p>
+      <p className="bio">
+        {userData.bio ? userData.bio : 'The user has no bio'}
+      </p>
 
       <ProfileStats>
         <div>
           <p>Repos</p>
-          <span>8</span>
+          <span>{userData.public_repos}</span>
         </div>
         <div>
           <p>Followers</p>
-          <span>3946</span>
+          <span>{userData.followers}</span>
         </div>
         <div>
           <p>Following</p>
-          <span>30</span>
+          <span>{userData.following}</span>
         </div>
       </ProfileStats>
 
       <ProfileBottom>
-        <div>
+
+        <div className={userData.location ? '' : 'unavailable'}>
           <i className="fas fa-map-marker-alt"></i>
-          <p>San Francisco</p>
+          <p>
+            {userData.location ? userData.location : 
+            'Not available'}
+          </p>
         </div>
-        <div>
-          <i className="fas fa-link"></i>
-          <a href="google.com">https://github.blog</a>
-        </div>
-        <div>
+
+        <div className={userData.twitter_username ? '' : 'unavailable'}>
           <i className="fab fa-twitter"></i>
-          <p>Not available</p>
+          <p>
+            {userData.twitter_username ? userData.twitter_username : 
+            'Not available'}
+          </p>
         </div>
-        <div>
+
+        <div className={userData.company ? '' : 'unavailable'}>
           <i className="fas fa-building"></i>
-          <p>@github</p>
+          <p>
+            {userData.company ? userData.company : 
+            'Not available'}
+          </p>
         </div>
+
+        <div className={userData.blog ? '' : 'unavailable'}>
+          <i className="fas fa-link"></i>
+          {userData.blog ? 
+          <a href={userData.blog} target="_blank" rel="noopener noreferrer">{userData.blog}</a>
+          :
+          <p>Not available</p>}
+        </div>
+
       </ProfileBottom>
 
     </Content>
