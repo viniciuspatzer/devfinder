@@ -1,4 +1,5 @@
 import { FormEvent } from 'react';
+
 import { Content } from './styles'
 import { FiSearch } from 'react-icons/fi'
 
@@ -19,7 +20,7 @@ export function SearchBar({ setUsername, usernameInput, setUsernameInput }: Sear
 
   return(
     <Content>
-      <form onSubmit={handleUserSearched}>
+      <form onSubmit={handleUserSearched} autoComplete="off">
         <div>
           <FiSearch color="var(--contrast-blue)" size="30" display="hidden"/>
           <input

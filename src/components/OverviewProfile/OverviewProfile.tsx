@@ -1,5 +1,5 @@
 import { Content, ProfileHeader, ProfileStats, ProfileBottom } from "./styles";
-import { GitHubData } from '../../interfaces';
+import { GitHubData } from '../../public-interfaces';
 
 interface OverviewProfileProps{
   userData: GitHubData;
@@ -13,7 +13,9 @@ export function OverviewProfile({ userData }: OverviewProfileProps){
         <img src={userData.avatar_url} alt="profile img" />
         <div>
           <h1>{userData.name}</h1>
-          <span>@{userData.login}</span>
+          <a href={`https://github.com/${userData.login}`} target="_blank" rel="noopener noreferrer">
+            @{userData.login}
+          </a>
           <p>
             Joined at {userData.created_at ? new Intl.DateTimeFormat(navigator.language)
             .format(new Date(userData.created_at)) : ''}
@@ -21,27 +23,31 @@ export function OverviewProfile({ userData }: OverviewProfileProps){
         </div>
       </ProfileHeader>
 
+
       <p className="bio">
         {userData.bio ? userData.bio : 'The user has no bio'}
       </p>
+
 
       <ProfileStats>
         <div>
           <p>Repos</p>
           <span>{userData.public_repos}</span>
         </div>
+
         <div>
           <p>Followers</p>
           <span>{userData.followers}</span>
         </div>
+
         <div>
           <p>Following</p>
           <span>{userData.following}</span>
         </div>
       </ProfileStats>
 
-      <ProfileBottom>
 
+      <ProfileBottom>
         <div className={userData.location ? '' : 'unavailable'}>
           <i className="fas fa-map-marker-alt"></i>
           <p>
@@ -52,10 +58,10 @@ export function OverviewProfile({ userData }: OverviewProfileProps){
 
         <div className={userData.twitter_username ? '' : 'unavailable'}>
           <i className="fab fa-twitter"></i>
-          <p>
-            {userData.twitter_username ? userData.twitter_username : 
-            'Not available'}
-          </p>
+          {userData.twitter_username ? 
+          <a href={`https://twitter.com/${userData.twitter_username}`}target="_blank" rel="noopener noreferrer">{userData.twitter_username}</a>
+          :
+          <p>Not available</p>}
         </div>
 
         <div className={userData.company ? '' : 'unavailable'}>
@@ -69,11 +75,12 @@ export function OverviewProfile({ userData }: OverviewProfileProps){
         <div className={userData.blog ? '' : 'unavailable'}>
           <i className="fas fa-link"></i>
           {userData.blog ? 
-          <a href={userData.blog} target="_blank" rel="noopener noreferrer">{userData.blog}</a>
+          <a href={userData.blog} target="_blank" rel="noopener noreferrer">
+            {userData.blog.replace(/https?:\/\//i, "")}
+          </a>
           :
           <p>Not available</p>}
         </div>
-
       </ProfileBottom>
 
     </Content>
