@@ -50,12 +50,5 @@ export const Content = styled.div`
       filter: brightness(1.25);
     }
   }
-
-  *{
-    -webkit-user-select: none;      
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  } 
 }
 `;
