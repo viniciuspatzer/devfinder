@@ -29,7 +29,7 @@ export function Header(){
   return(
     <TopHeader>
 
-      <a href={window.location.hostname}>
+      <a href="https://devfinder-viniciuspatzer.netlify.app/">
         devfinder
       </a>
       <div onClick={toggleDarkMode}>
