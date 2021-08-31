@@ -1,5 +1,5 @@
 <div align="center"> 
-  <img src="./logo.png" alt="dev finder logo" width="200" />
+  <img src="./devfinder.png" alt="dev finder logo" width="250" />
 </div>
 
 <hr>
