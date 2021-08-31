@@ -14,15 +14,15 @@ export function App() {
   const [username, setUsername] = useState('octocat');
 
   const [userData, setUserData] = useState<GitHubData>({} as GitHubData);
-  const [reposData, setReposData] = useState<Repository[]>([]);
+  const [repositoriesData, setRepositoriesData] = useState<Repository[]>([]);
 
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
-        setLoading(true);
+        setIsLoading(true);
         setError(false);
 
         const userResponse = await fetch(`https://api.github.com/users/${username}`);
@@ -35,13 +35,13 @@ export function App() {
         const userData = await userResponse.json();
         const reposData = await reposResponse.json();
 
-        setLoading(false);
+        setIsLoading(false);
         setUserData(userData);
-        setReposData(reposData);
+        setRepositoriesData(reposData);
 
       } catch (error) {
         console.error(error);
-        setLoading(false);
+        setIsLoading(false);
         setError(true);
       }
     })();
@@ -53,12 +53,12 @@ export function App() {
       <Header />
       <SearchBar setUsername={setUsername} />
       {
-      loading ? <Spinner /> : 
+      isLoading ? <Spinner /> : 
       error ? <ErrorComponent message="User not found..."/> : <OverviewProfile userData={userData}/>
       }
       {
-        loading ? null :
-        error ? null : <RepositoryList repositories={reposData} /> 
+        isLoading ? null :
+        error ? null : <RepositoryList repositories={repositoriesData} /> 
       }
     </Container>
 
