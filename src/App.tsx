@@ -12,7 +12,6 @@ import { GitHubData, Repository } from './public-interfaces';
 
 export function App() {
   const [username, setUsername] = useState('octocat');
-  const [usernameInput, setUsernameInput] = useState('');
 
   const [userData, setUserData] = useState<GitHubData>({} as GitHubData);
   const [reposData, setReposData] = useState<Repository[]>([]);
@@ -46,18 +45,13 @@ export function App() {
         setError(true);
       }
     })();
-
   }, [username]);
 
   return (
     <>
     <Container>
       <Header />
-      <SearchBar
-        setUsername={setUsername}
-        usernameInput={usernameInput}
-        setUsernameInput={setUsernameInput}
-      />
+      <SearchBar setUsername={setUsername} />
       {
       loading ? <Spinner /> : 
       error ? <ErrorComponent message="User not found..."/> : <OverviewProfile userData={userData}/>

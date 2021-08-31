@@ -1,21 +1,20 @@
-import { FormEvent } from 'react';
+import { FormEvent, useRef } from 'react';
 
 import { Content } from './styles'
 import { FiSearch } from 'react-icons/fi'
 
 interface SearchBarProps{
   setUsername: (active: string) => void;
-  usernameInput: string;
-  setUsernameInput: (active: string) => void;
 }
 
-export function SearchBar({ setUsername, usernameInput, setUsernameInput }: SearchBarProps){
+export function SearchBar({ setUsername }: SearchBarProps){
+  const inputElem = useRef<HTMLInputElement>(null);
 
   function handleUserSearched(e: FormEvent){
     e.preventDefault();
 
-    if(usernameInput.length > 0)
-      setUsername(usernameInput);
+    if(inputElem.current && inputElem.current.value)
+      setUsername(inputElem.current.value);
   }
 
   return(
@@ -27,8 +26,7 @@ export function SearchBar({ setUsername, usernameInput, setUsernameInput }: Sear
             id="form"
             type="text"
             placeholder="Search a GitHub username"
-            value={usernameInput}
-            onChange={(e) => {setUsernameInput(e.target.value)}}
+            ref={inputElem}
           />
         </div>
         <button type="submit">Search</button>
