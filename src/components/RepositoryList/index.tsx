@@ -1,4 +1,4 @@
-import { RepositoryItem } from "../RepositoryItem/RepositoryItem"
+import { RepositoryItem } from "../RepositoryItem"
 
 import { Content } from "./styles"
 import { Repository } from '../../public-interfaces.js'

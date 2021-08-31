@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 
-import { Header } from "./components/Header/Header";
-import { OverviewProfile } from "./components/OverviewProfile/OverviewProfile";
-import { SearchBar } from "./components/SearchBar/SearchBar";
-import { Spinner } from './components/Spinner/Spinner';
-import { ErrorComponent } from './components/Error/ErrorComponent';
-import { RepositoryList } from './components/RepositoryList/RepositoryList';
+import { Header } from "./components/Header";
+import { OverviewProfile } from "./components/OverviewProfile";
+import { SearchBar } from "./components/SearchBar";
+import { Spinner } from './components/Spinner';
+import { ErrorComponent } from './components/Error';
+import { RepositoryList } from './components/RepositoryList';
 
 import { GlobalStyle, Container } from "./style/global";
 import { GitHubData, Repository } from './public-interfaces';
@@ -48,7 +48,7 @@ export function App() {
   }, [username]);
 
   return (
-    <>
+
     <Container>
       <Header />
       <SearchBar setUsername={setUsername} />
@@ -60,9 +60,8 @@ export function App() {
         isLoading ? null :
         error ? null : <RepositoryList repositories={repositoriesData} /> 
       }
+      
+      <GlobalStyle />
     </Container>
-
-    <GlobalStyle />
-    </>
   );
 }
