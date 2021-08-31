@@ -38,10 +38,10 @@ First of all, you need to have [Git](https://git-scm.com) and [Node](https://nod
 
 ```bash
 # Clone this project
-$ git clone https://github.com/viniciuspatzer/dtmoney.git
+$ git clone https://github.com/viniciuspatzer/devfinder.git
 
 # Access
-$ cd dtmoney
+$ cd devfinder
 
 # Install dependencies
 $ yarn install
