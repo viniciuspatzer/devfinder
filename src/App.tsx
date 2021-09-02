@@ -52,8 +52,7 @@ export function App() {
       error ? <ErrorComponent message={error}/> : <OverviewProfile userData={userData}/>
       }
       {
-        isLoading ? null :
-        error ? null : <RepositoryList repositories={repositoriesData} /> 
+        isLoading || error ? null : <RepositoryList repositories={repositoriesData} />
       }
       
       <GlobalStyle />
