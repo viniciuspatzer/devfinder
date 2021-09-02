@@ -9,6 +9,7 @@ import { RepositoryList } from './components/RepositoryList';
 
 import { GlobalStyle, Container } from "./style/global";
 import { GitHubData, Repository } from './public-interfaces';
+import { getJSON } from './helpers';
 
 export function App() {
   const [username, setUsername] = useState('octocat');
@@ -17,44 +18,38 @@ export function App() {
   const [repositoriesData, setRepositoriesData] = useState<Repository[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     (async () => {
       try {
         setIsLoading(true);
-        setError(false);
+        setError('');
 
-        const userResponse = await fetch(`https://api.github.com/users/${username}`);
+        const [userData, reposData] = await Promise.all([
+          getJSON(`https://api.github.com/users/${username}`, 'User not found...'),
+          getJSON(`https://api.github.com/users/${username}/repos`, 'Something went wrong')
+        ]);
 
-        if(!userResponse.ok)
-          throw new Error('User not found');
-
-        const reposResponse = await fetch(`https://api.github.com/users/${username}/repos`);
-
-        const userData = await userResponse.json();
-        const reposData = await reposResponse.json();
-
-        setIsLoading(false);
         setUserData(userData);
         setRepositoriesData(reposData);
 
-      } catch (error) {
+      } catch (error: any) {
         console.error(error);
-        setIsLoading(false);
-        setError(true);
+        setError(error.message)
       }
-    })();
+      setIsLoading(false);
+    })(); 
+
   }, [username]);
 
   return (
-
     <Container>
       <Header />
       <SearchBar setUsername={setUsername} />
       {
       isLoading ? <Spinner /> : 
-      error ? <ErrorComponent message="User not found..."/> : <OverviewProfile userData={userData}/>
+      error ? <ErrorComponent message={error}/> : <OverviewProfile userData={userData}/>
       }
       {
         isLoading ? null :
