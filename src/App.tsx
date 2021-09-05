@@ -27,7 +27,7 @@ export function App() {
         setError('');
 
         const [userData, reposData] = await Promise.all([
-          getJSON(`https://api.github.com/users/${username}`, 'User not found...'),
+          getJSON(`https://api.github.com/users/${username}`, 'Something went wrong'),
           getJSON(`https://api.github.com/users/${username}/repos`, 'Something went wrong')
         ]);
 
@@ -52,9 +52,8 @@ export function App() {
       error ? <ErrorComponent message={error}/> : <OverviewProfile userData={userData}/>
       }
       {
-        isLoading || error ? null : <RepositoryList repositories={repositoriesData} />
+        !isLoading && !error && <RepositoryList repositories={repositoriesData} />
       }
-      
       <GlobalStyle />
     </Container>
   );
